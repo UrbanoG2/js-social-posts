@@ -64,12 +64,6 @@ function createPost (array, container) {
 
         const container = document.getElementById("container");
 
-        container.innerHTML = " ";
-
-        // const postContainer = document.createElement("div");
-        // container.append(postContainer);
-
-        // console.log(postContainer);
         const object = array[i];
 
         //scriviamo il dom
