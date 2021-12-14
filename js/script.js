@@ -9,6 +9,7 @@
 
 const posts =[
     {
+        id :1,
         name: "Giuseppe Urbano",
         profileImg: Math.floor(Math.random() * 100) + 1,
         date:"1 anno fa",
@@ -17,6 +18,7 @@ const posts =[
     },
 
     {
+        id :2,
         name: "Giuseppe Urbano",
         profileImg: Math.floor(Math.random() * 100) + 1,
         date:"1 anno fa",
@@ -25,6 +27,7 @@ const posts =[
     },
 
     {
+        id :3,
         name: "Giuseppe Urbano",
         profileImg: Math.floor(Math.random() * 100) + 1,
         date:"1 anno fa",
@@ -33,6 +36,7 @@ const posts =[
     },
 
     {
+        id :4,
         name: "Giuseppe Urbano",
         profileImg: Math.floor(Math.random() * 100) + 1,
         date:"1 anno fa",
@@ -41,16 +45,11 @@ const posts =[
     },
 ]
 
-console.log(posts.length);
 
 //prendo il mio elemento di riferimento dal dom 
 
 const container = document.getElementById("container");
 
-// const postContainer = document.createElement("div");
-// container.append(postContainer);
-
-// console.log(postContainer);
 
 //richiamo la funzione
 createPost (posts, container)
@@ -94,13 +93,13 @@ function createPost (array, container) {
             <div class="post__footer">
                     <div class="likes js-likes">
                         <div class="likes__cta">
-                            <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <a class="like-button  js-like-button" href="#" data-postid="${object.id}">
                                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                                 <span class="like-button__label">Mi Piace</span>
                             </a>
                         </div>
                         <div class="likes__counter">
-                            Piace a <b id="like-counter-1" class="js-likes-counter">${object.likes}</b> persone
+                            Piace a <b id="like-counter-${object.id}" class="js-likes-counter">${object.likes}</b> persone
                         </div>
                     </div> 
             </div>        
@@ -108,6 +107,21 @@ function createPost (array, container) {
 
         `
         container.innerHTML += containedPost;
-    }   
+    } 
 }
 
+const btns = document.querySelectorAll(".like-button");
+
+
+for (let i = 0; i < btns.length; i++) {
+    const button = btns[i];
+    button.addEventListener ("click", function (event){
+        event.preventDefault();
+        const id = i + 1;
+        const likeContainer = document.getElementById ("like-counter-" + id);
+        
+
+        posts[i].likes += 1;
+        likeContainer.innerHTML = posts[i].likes;
+    })
+}
