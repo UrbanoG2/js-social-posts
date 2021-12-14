@@ -110,18 +110,59 @@ function createPost (array, container) {
     } 
 }
 
+
+//prendo tutte le classi che mi servono
+
 const btns = document.querySelectorAll(".like-button");
 
-
+//ciclo sul nodo ottenuto
 for (let i = 0; i < btns.length; i++) {
     const button = btns[i];
+
+    //aggiungo l'evento per tutti i bottoni
     button.addEventListener ("click", function (event){
         event.preventDefault();
+
         const id = i + 1;
         const likeContainer = document.getElementById ("like-counter-" + id);
-        
 
-        posts[i].likes += 1;
-        likeContainer.innerHTML = posts[i].likes;
+        if (this.classList.contains("like-button--liked")) {
+
+            //se ce l'ha già, gliela devo togliere
+            this.classList.remove("like-button--liked");
+
+            //e il numero di like deve diminuire
+            posts[i].likes -= 1;
+
+            //e stampo
+            likeContainer.innerHTML = posts[i].likes;
+
+
+        } else {
+
+            //aggiungo la classe se non ce l'ha
+            this.classList.add("like-button--liked");
+
+            //stampo in pagina 
+            posts[i].likes += 1;
+            likeContainer.innerHTML = posts[i].likes;
+        }
+
+        
     })
 }
+
+
+// function getInitials (name) {
+//     const splitNames = name.split(" ");
+//     let initials = "";
+
+//     for (let i = 0; i < splitNames.length; i++) {
+//         const element = splitNames[i];
+//         initials += element[0];
+//     }
+
+    
+//     return initials
+// }
+
